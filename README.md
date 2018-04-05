@@ -1,3 +1,3 @@
 # Solutions from leetcode.com
 
-Branch names convention: solution-[index of solution on leetcode.com]
+Solutions grouped into packages [difficulty-level][p-[problem index]]
