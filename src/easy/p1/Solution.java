@@ -1,3 +1,5 @@
+package easy.p1;
+
 import java.util.Arrays;
 
 public class Solution {
