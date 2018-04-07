@@ -4,7 +4,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.isPalindrome2(1410110141));
+        System.out.println(solution.isPalindrome2(11));
     }
 
     // 3%
@@ -26,7 +26,7 @@ public class Solution {
         return y == x;
     }
 
-    // 17%
+    // 56%
     public boolean isPalindrome2(int x) {
 
         if (x < 0) {
@@ -42,10 +42,13 @@ public class Solution {
         }
 
         int numCount = 0;
-        int tmp = x;
-        while (tmp != 0) {
-            tmp /= 10;
+        int divider = 1;
+        while (x > divider) {
             numCount++;
+            divider *= 10;
+            if (numCount == 10) {
+                break;
+            }
         }
 
         int middle = numCount / 2;
