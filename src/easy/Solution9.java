@@ -1,10 +1,10 @@
-package easy.p9;
+package easy;
 
-public class Solution {
+public class Solution9 {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.isPalindrome3(121));
+        Solution9 solution9 = new Solution9();
+        System.out.println(solution9.isPalindrome3(121));
     }
 
     // 3%

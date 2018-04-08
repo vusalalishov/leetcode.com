@@ -1,10 +1,10 @@
-package easy.p7;
+package easy;
 
-public class Solution {
+public class Solution7 {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.reverse1(123));
+        Solution7 solution7 = new Solution7();
+        System.out.println(solution7.reverse1(123));
     }
 
     // 55%

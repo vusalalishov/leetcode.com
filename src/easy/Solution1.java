@@ -1,14 +1,14 @@
-package easy.p1;
+package easy;
 
 import java.util.Arrays;
 
-public class Solution {
+public class Solution1 {
 
     public static void main(String[] args) {
         int[] nums = new int[] {5, 7, 3, 5, 2, 10, -20, -3, -2, -7, 8};
         int target = 10;
-        Solution solution = new Solution();
-        System.out.println(Arrays.toString(solution.twoSum2(nums, target)));
+        Solution1 solution1 = new Solution1();
+        System.out.println(Arrays.toString(solution1.twoSum2(nums, target)));
     }
 
     // Beats 14% submissions

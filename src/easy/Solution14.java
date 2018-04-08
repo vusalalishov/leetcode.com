@@ -1,9 +1,9 @@
-package easy.p14;
+package easy;
 
-public class Solution {
+public class Solution14 {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution14 solution = new Solution14();
         String s = solution.longestCommonPrefix(new String[]{
                 "aa",
                 "a"

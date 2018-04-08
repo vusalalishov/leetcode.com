@@ -1,14 +1,12 @@
-package easy.p13;
-
-import javafx.scene.control.Slider;
+package easy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class Solution13 {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution13 solution = new Solution13();
         System.out.println(solution.romanToInt2("IL"));
     }
 
