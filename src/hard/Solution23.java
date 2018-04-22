@@ -12,7 +12,7 @@ public class Solution23 {
 
         Solution23 solution = new Solution23();
         System.out.println(solution.mergeKLists(new ListNode[] {
-                n1, n2
+                null, null
         }));
     }
 
@@ -23,20 +23,35 @@ public class Solution23 {
             return null;
         }
 
-        Arrays.sort(lists, Comparator.nullsFirst(Comparator.comparingInt(o -> o.val)));
-
-        int j = 0;
-        while (j < lists.length && lists[j] == null) {
-            j++;
+        if (lists.length == 1) {
+            return lists[0];
         }
-        if (j == lists.length) {
+
+        int pIndex = 0;
+        while (pIndex < lists.length && lists[pIndex] == null) {
+            pIndex++;
+        }
+
+        if (pIndex == lists.length) {
             return null;
         }
-        ListNode sorted = lists[j];
+
+        int min = lists[pIndex].val;
+        int minIndex = pIndex;
+        int minPointer = pIndex + 1;
+        while (minPointer < lists.length) {
+            if (lists[minPointer] != null && lists[minPointer].val < min) {
+                min = lists[minPointer].val;
+                minIndex = minPointer;
+            }
+            minPointer++;
+        }
+
+        ListNode sorted = lists[minIndex];
 
         for (int i = 0; i < lists.length; i++) {
 
-            if (i == j) {
+            if (i == minIndex) {
                 continue;
             }
 
