@@ -7,13 +7,76 @@ public class Solution23 {
 
     public static void main(String[] args) {
         ListNode n1 = new ListNode(1);
+        n1.next = new ListNode(4);
+        n1.next.next = new ListNode(5);
 
-        ListNode n2 = new ListNode(0);
+        ListNode n2 = new ListNode(1);
+        n2.next = new ListNode(3);
+        n2.next.next = new ListNode(4);
+
+        ListNode n3 = new ListNode(2);
+        n3.next = new ListNode(6);
 
         Solution23 solution = new Solution23();
-        System.out.println(solution.mergeKLists(new ListNode[] {
-                null, null
+        System.out.println(solution.mergeKLists2(new ListNode[] {
+                n1, n2, n3
         }));
+    }
+
+    // 118 ms
+    public ListNode mergeKLists2(ListNode[] lists) {
+        if (lists.length == 0) {
+            return null;
+        }
+
+        if (lists.length == 1) {
+            return lists[0];
+        }
+
+        Arrays.sort(lists, Comparator.nullsFirst(Comparator.comparingInt(o -> o.val)));
+
+        int startPointer = 0;
+        while (startPointer < lists.length && lists[startPointer] == null) {
+            startPointer++;
+        }
+
+        if (startPointer == lists.length) {
+            return null;
+        }
+
+        ListNode sorted = null;
+        ListNode sortedPointer = null;
+
+        while (true) {
+            int minValue = 0;
+            boolean minValueAssigned = false;
+            for (int i = 0; i < lists.length; i++) {
+                if (lists[i] != null) {
+                    if (!minValueAssigned) {
+                        minValue = lists[i].val;
+                        minValueAssigned = true;
+                    }
+                    if (lists[i].val == minValue) {
+                        if (sorted == null) {
+                            sorted = new ListNode(lists[i].val);
+                            sortedPointer = sorted;
+                        } else {
+                            sortedPointer.next = new ListNode(lists[i].val);
+                            sortedPointer = sortedPointer.next;
+                        }
+                        lists[i] = lists[i].next;
+                    }
+                }
+            }
+            if (!minValueAssigned) {
+                break;
+            } else {
+                Arrays.sort(lists, Comparator.nullsFirst(Comparator.comparingInt(o -> o.val)));
+            }
+        }
+
+        return sorted;
+
     }
 
     // 195ms - Bad!
