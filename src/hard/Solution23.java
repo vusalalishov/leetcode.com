@@ -26,7 +26,9 @@ public class Solution23 {
         }));
     }
 
-    // TODO: optimize it
+    // TODO: divide and conquer
+
+
     public ListNode mergeKLists3(ListNode[] lists) {
         return mergeList(lists, 0, lists.length);
     }
