@@ -17,10 +17,65 @@ public class Solution23 {
         ListNode n3 = new ListNode(2);
         n3.next = new ListNode(6);
 
+        ListNode n4 = new ListNode(1);
+        ListNode n5 = new ListNode(0);
+
         Solution23 solution = new Solution23();
-        System.out.println(solution.mergeKLists2(new ListNode[] {
-                n1, n2, n3
+        System.out.println(solution.mergeKLists3(new ListNode[] {
+                n4, n5
         }));
+    }
+
+    // TODO: optimize it
+    public ListNode mergeKLists3(ListNode[] lists) {
+        return mergeList(lists, 0, lists.length);
+    }
+
+    private ListNode mergeList(ListNode[] lists, int from, int to) {
+
+        if (from + 2 < to) {
+            return merge(merge(lists[from], lists[from + 1]), mergeList(lists, from + 2, to));
+        }
+        if (from + 1 < to) {
+            return merge(lists[from], lists[from + 1]);
+        }
+        if (from < to) {
+            return lists[from];
+        }
+
+        return null;
+    }
+
+    private ListNode merge(ListNode n1, ListNode n2) {
+        if (n1 == null || n2 == null) {
+            return n1 == null ? n2 : n1;
+        }
+        ListNode n3;
+        if (n1.val <= n2.val) {
+            n3 = new ListNode(n1.val);
+            n1 = n1.next;
+        } else {
+            n3 = new ListNode(n2.val);
+            n2 = n2.next;
+        }
+        ListNode n3Pointer = n3;
+        while (n1 != null && n2 != null) {
+            if (n1.val <= n2.val) {
+                n3Pointer.next = new ListNode(n1.val);
+                n1 = n1.next;
+            } else {
+                n3Pointer.next = new ListNode(n2.val);
+                n2 = n2.next;
+            }
+            n3Pointer = n3Pointer.next;
+        }
+        ListNode notEmptyNode = n1 == null ? n2 : n1;
+        while (notEmptyNode != null) {
+            n3Pointer.next = new ListNode(notEmptyNode.val);
+            notEmptyNode = notEmptyNode.next;
+            n3Pointer = n3Pointer.next;
+        }
+        return n3;
     }
 
     // 118 ms
