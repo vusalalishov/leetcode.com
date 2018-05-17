@@ -19,6 +19,7 @@ public class Solution18 {
         System.out.println(solution.fourSum(new int[] {-5,5,4,-3,0,0,4,-2}, 4));
     }
 
+    // TODO: try to expand around every element - and check 4 sum like: {1,[2,(3),4,5],6} and {[1,2,(3),4],5,6} - here the middle is 3 - do it for all elements
     // Accepted, 117ms - bad performance - to be optimized
     public List<List<Integer>> fourSum(int[] nums, int target) {
 
