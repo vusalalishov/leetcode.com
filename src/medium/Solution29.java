@@ -10,6 +10,7 @@ public class Solution29 {
     }
 
     // ACCEPTED! Very bad result! To be optimized. Idea - like binary search, searching optimal value for div result
+    // Optimized - beats 43%
     public int divide(int dividend, int divisor) {
 
         boolean signed = dividend < 0 ^ divisor < 0;
