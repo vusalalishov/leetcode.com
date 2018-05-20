@@ -5,9 +5,56 @@ public class Solution29 {
     public static void main(String[] args) {
         Solution29 solution = new Solution29();
 
-        System.out.println(solution.divide(-2147483648, 2));
+        System.out.println(solution.divide1(-2147483648, 2));
 //        System.out.println(Integer.MIN_VALUE - 1);
     }
+
+    // region from_discussion
+
+    private final static int MIN_INT = 0x80000000;
+    private final static int MAX_INT = 0x7FFFFFFF;
+
+    public int divide1(int dividend, int divisor) {
+        if (divisor == MIN_INT) {
+            return divisor == dividend ? 1 : 0;
+        } else if (dividend == MIN_INT && divisor == -1) {
+            return MAX_INT;
+        } else if (dividend == MIN_INT) {
+            return divisor < 0 ? divide(dividend - divisor, divisor) + 1 : divide(dividend + divisor, divisor) - 1;
+        }
+        boolean negative = ((dividend & MIN_INT) ^ (divisor & MIN_INT)) != 0;
+        if (dividend < 0) {
+            dividend = 0 - dividend;
+        }
+        if (divisor < 0) {
+            divisor = 0 - divisor;
+        }
+
+        return negative ? 0 - dividePositiveNumbers(dividend, divisor)
+                : dividePositiveNumbers(dividend, divisor);
+    }
+
+    private int dividePositiveNumbers(int dividend, int divisor) {
+        if (dividend < divisor) {
+            return 0;
+        }
+        int res = binarySearch(dividend, divisor);
+        int powerOfTwo = res - 1;
+        int val = res == 0 ? 0 : divisor << powerOfTwo;
+        res = res == 0 ? 0 : (1 << powerOfTwo);
+        return res + dividePositiveNumbers(dividend - val, divisor);
+    }
+
+    private int binarySearch(int dividend, int divisor) {
+        int res = 0;
+        while(divisor <= dividend && divisor > 0) {
+            res++;
+            divisor <<= 1;
+        }
+        return res;
+    }
+
+    // endregion
 
     // ACCEPTED! Very bad result! To be optimized. Idea - like binary search, searching optimal value for div result
     // Optimized - beats 43%
