@@ -9,10 +9,10 @@ public class Solution32 {
 
     public static void main(String[] args) {
         Solution32 solution = new Solution32();
-        System.out.println(solution.longestValidParentheses("(()"));
+        System.out.println(solution.longestValidParentheses("(())"));
     }
 
-    // ACCEPTED - 33%
+    // ACCEPTED - 47%
     public int longestValidParentheses(String s) {
         int len = s.length();
         if (len < 2) {
@@ -22,12 +22,6 @@ public class Solution32 {
         int[] source = new int[len];
         for (int i = 0; i < len; i++) {
             source[i] = s.charAt(i) == OPEN ? OPEN_VAL : CLOSE_VAL;
-        }
-
-        for (int i = 1; i < len; i++) {
-            if (source[i] == CLOSE_VAL && source[i - 1] == OPEN_VAL) {
-                expandAround(source, i - 1, i);
-            }
         }
 
         boolean expanded = true;
