@@ -12,6 +12,7 @@ public class Solution32 {
         System.out.println(solution.longestValidParentheses("(())"));
     }
 
+    // TODO: review discussion forum
     // ACCEPTED - 47%
     public int longestValidParentheses(String s) {
         int len = s.length();

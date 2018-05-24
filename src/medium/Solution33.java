@@ -9,6 +9,7 @@ public class Solution33 {
         }, 4));
     }
 
+    // TODO: review discussion forum
     // 82%
     public int search(int[] nums, int target) {
         if (nums.length == 0) {
