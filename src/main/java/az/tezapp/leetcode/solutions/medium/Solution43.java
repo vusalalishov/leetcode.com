@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Solution43 {
 
-    // 13% - TODO: optimize it
+    // 13% - TODO: optimize it[Play with value caching]
     public String multiply(String num1, String num2) {
 
         if (num1.equals("0") || num2.equals("0")) {
