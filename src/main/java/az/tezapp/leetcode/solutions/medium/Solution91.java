@@ -2,21 +2,10 @@ package az.tezapp.leetcode.solutions.medium;
 
 public class Solution91 {
 
-    public static void main(String[] args) {
-        Solution91 solution = new Solution91();
-        System.out.println(solution.numDecodings("24726"));
-    }
-
-    private static void print(int num, int expected, int actual) {
-        System.out.println(num + " - " + expected + " , " + actual + " : " + (actual == expected));
-    }
-
+    // go from back to front
     public int numDecodings(String s) {
         final int zeroIndex = 48;
         int len = s.length();
-        if (len == 0) {
-            return len;
-        }
         int[] combinationCount = new int[len];
         int prev = 0;
         for (int i = 0; i < len; i++) {

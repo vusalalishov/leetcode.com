@@ -1,9 +1,13 @@
 package az.tezapp.leetcode.solutions.medium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Solution43 {
+
+    private final Map<Integer, List<Integer>> CACHE = new HashMap<>();
 
     // 13% - TODO: optimize it[Play with value caching]
     public String multiply(String num1, String num2) {
@@ -41,6 +45,8 @@ public class Solution43 {
             sb.append(remainder);
         }
 
+        CACHE.clear();
+
         return sb.reverse().toString();
     }
 
@@ -49,6 +55,14 @@ public class Solution43 {
         for (int i = 0; i < indent; i++) {
             res.add(0);
         }
+
+        if (CACHE.containsKey(multiplier)) {
+            res.addAll(CACHE.get(multiplier));
+            return res;
+        }
+
+        List<Integer> toCache = new ArrayList<>();
+
         int len = num.length();
         int remainder = 0;
         for (int i = len - 1; i >= 0; i--) {
@@ -56,10 +70,15 @@ public class Solution43 {
             int mul = k * multiplier + remainder;
             remainder = mul / 10;
             res.add(mul % 10);
+            toCache.add(mul % 10);
         }
         if (remainder != 0) {
             res.add(remainder);
+            toCache.add(remainder);
         }
+
+        CACHE.put(multiplier, toCache);
+
         return res;
     }
 

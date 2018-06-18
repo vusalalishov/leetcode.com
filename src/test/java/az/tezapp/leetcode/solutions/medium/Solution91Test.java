@@ -20,7 +20,7 @@ class Solution91Test {
             "200, 0"
     })
     void testNumDecodings(String s, int num) {
-        assertEquals(solution.numDecodings(s), num);
+        assertEquals(num, solution.numDecodings(s));
     }
 
 }
