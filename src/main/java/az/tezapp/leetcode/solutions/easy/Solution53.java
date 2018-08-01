@@ -2,7 +2,7 @@ package az.tezapp.leetcode.solutions.easy;
 
 public class Solution53 {
 
-    // ACCEPTED - 7%
+    // ACCEPTED - 7% [TODO: optimize it]
     public int maxSubArray(int[] nums) {
         return findMaxSub(0, nums.length - 1, nums);
     }
