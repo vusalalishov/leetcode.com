@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import az.tezapp.leetcode.solutions.Interval;
+
 public class Solution56 {
 
     // ACCEPTED - 2% [TODO: optimize it (avoid sorting)]
