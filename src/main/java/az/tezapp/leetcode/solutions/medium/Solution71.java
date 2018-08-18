@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Solution71 {
 
-    // ACCEPTED: 26%
+    // ACCEPTED: 93%
     public String simplifyPath(String path) {
 
         String[] source = path.split("/");
