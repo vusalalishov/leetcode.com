@@ -3,6 +3,7 @@ package az.tezapp.leetcode.solutions.medium;
 import java.util.Arrays;
 
 import az.tezapp.leetcode.solutions.Interval;
+import az.tezapp.leetcode.solutions.milestone1.medium.Solution56;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 

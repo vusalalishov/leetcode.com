@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import az.tezapp.leetcode.solutions.Interval;
+import az.tezapp.leetcode.solutions.milestone1.hard.Solution57;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 

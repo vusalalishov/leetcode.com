@@ -1,5 +1,6 @@
 package az.tezapp.leetcode.solutions.hard;
 
+import az.tezapp.leetcode.solutions.milestone1.hard.Solution41;
 import org.junit.jupiter.api.Test;
 
 class Solution41Test {

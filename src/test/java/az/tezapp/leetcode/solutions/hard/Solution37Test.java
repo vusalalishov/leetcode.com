@@ -1,5 +1,6 @@
 package az.tezapp.leetcode.solutions.hard;
 
+import az.tezapp.leetcode.solutions.milestone1.hard.Solution37;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 

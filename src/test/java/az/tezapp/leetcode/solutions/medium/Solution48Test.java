@@ -1,8 +1,9 @@
 package az.tezapp.leetcode.solutions.medium;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
+
+import az.tezapp.leetcode.solutions.milestone1.medium.Solution48;
+import org.junit.jupiter.api.Test;
 
 class Solution48Test {
 
