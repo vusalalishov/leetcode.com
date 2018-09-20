@@ -2,7 +2,7 @@ package az.tezapp.leetcode.solutions.milestone2.medium;
 
 public class Solution79 {
 
-    // ACCEPTED - 37%
+    // ACCEPTED - 37% [todo: could be optimized]
     public boolean exist(char[][] board, String word) {
         if (board.length == 0 || board[0].length == 0 || word.isEmpty()) {
             return false;
