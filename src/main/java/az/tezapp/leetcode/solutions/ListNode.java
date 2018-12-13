@@ -19,4 +19,15 @@ public class ListNode {
         }
         return out.toString();
     }
+
+    public static ListNode of(int... items) {
+        ListNode head = new ListNode(items[0]);
+        ListNode pointer = head;
+        for (int i = 1; i < items.length; i++) {
+            pointer.next = new ListNode(items[i]);
+            pointer = pointer.next;
+        }
+        return head;
+    }
+
 }
