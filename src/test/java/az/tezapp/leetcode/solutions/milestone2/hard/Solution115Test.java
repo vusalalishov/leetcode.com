@@ -9,6 +9,7 @@ class Solution115Test {
 
     @Test
     void testNumDistinct1() {
+        assertThat(subject.numDistinct("rabbbt", "rabbit")).isEqualTo(0);
         assertThat(subject.numDistinct("aabb", "abb")).isEqualTo(2);
         assertThat(subject.numDistinct("b", "b")).isEqualTo(1);
         assertThat(subject.numDistinct("rabbbit", "rabbit")).isEqualTo(3);
