@@ -14,6 +14,9 @@ public class UnionFind {
     public void union(int a, int b) {
         int ap = findParent(a);
         int bp = findParent(b);
+        if (ap == bp) {
+            return;
+        }
         if (Math.abs(ap) > Math.abs(bp)) {
             tree[bp] = ap;
         } else if (Math.abs(ap) < Math.abs(bp)) {
