@@ -1,0 +1,177 @@
+package az.tezapp.leetcode.solutions.milestone2.medium;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution130 {
+
+    private static final char O_SIGN = 'O';
+
+    private UF uf;
+    private int[][] cluster;
+    private Set<Integer> notSurroundedClusters = new HashSet<>();
+
+    // ACCEPTED - 17%
+    public void solve(char[][] board) {
+        if (board.length == 0) {
+            return;
+        }
+
+        cluster = new int[board.length][board[0].length];
+        notSurroundedClusters.clear();
+        prepareCluster();
+        uf = new UF(1000);
+
+        int clusterIndex = 1;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == O_SIGN) {
+
+                    int[] surroundedClusters = loadSurroundedClusters(i, j);
+                    if (surroundedClusters[4] == -1) {
+                        cluster[i][j] = clusterIndex;
+                        clusterIndex++;
+                    } else {
+                        int neighborCluster = surroundedClusters[surroundedClusters[4]];
+                        cluster[i][j] = neighborCluster;
+                        for (int k = surroundedClusters[4] + 1; k < 4; k++) {
+                            if (surroundedClusters[k] != -1 && neighborCluster != surroundedClusters[k]) {
+                                uf.union(neighborCluster, surroundedClusters[k]);
+                            }
+                        }
+                    }
+
+                    if (isBorder(i, board.length, j, board[0].length)) {
+                        notSurroundedClusters.add(cluster[i][j]);
+                    }
+                }
+            }
+        }
+
+        Set<Integer> tmpNotSurrounded = new HashSet<>();
+        for (Integer currentClusterIndex : notSurroundedClusters) {
+            for (int i = 1; i < clusterIndex; i++) {
+                if (i != currentClusterIndex && uf.connected(i, currentClusterIndex)) {
+                    tmpNotSurrounded.add(i);
+                }
+            }
+        }
+        notSurroundedClusters.addAll(tmpNotSurrounded);
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (cluster[i][j] > 0 && !notSurroundedClusters.contains(cluster[i][j])) {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+
+    }
+
+    private int[] loadSurroundedClusters(int i, int j) {
+        int[] surroundedClusters = new int[5];
+        surroundedClusters[0] = topClusterIndex(i, j);
+        surroundedClusters[1] = rightClusterIndex(i, j);
+        surroundedClusters[2] = bottomClusterIndex(i, j);
+        surroundedClusters[3] = leftClusterIndex(i, j);
+
+        int surroundedClusterIndex = 0;
+        while (surroundedClusterIndex < surroundedClusters.length - 1) {
+            if (surroundedClusters[surroundedClusterIndex] == -1) {
+                surroundedClusterIndex++;
+            } else {
+                break;
+            }
+        }
+        surroundedClusters[4] = surroundedClusterIndex < 4 ? surroundedClusterIndex : -1;
+        return surroundedClusters;
+    }
+
+    private int leftClusterIndex(int row, int col) {
+        return col > 0 ? cluster[row][col - 1] : -1;
+    }
+
+    private int bottomClusterIndex(int row, int col) {
+        return row < cluster.length - 1 ? cluster[row + 1][col] : -1;
+    }
+
+    private int rightClusterIndex(int row, int col) {
+        return col < cluster[0].length - 1 ? cluster[row][col + 1] : -1;
+    }
+
+    private int topClusterIndex(int row, int col) {
+        return row > 0 ? cluster[row - 1][col] : -1;
+    }
+
+    private boolean isBorder(int row, int rowMax, int col, int colMax) {
+        return row == 0 || row == rowMax - 1 || col == 0 || col == colMax - 1;
+    }
+
+    private void prepareCluster() {
+        for (int i = 0; i < cluster.length; i++) {
+            for (int j = 0; j < cluster[0].length; j++) {
+                cluster[i][j] = -1;
+            }
+        }
+    }
+
+    static class UF {
+
+        private int[] parent;  // parent[i] = parent of i
+        private byte[] rank;   // rank[i] = rank of subtree rooted at i (never more than 31)
+        private int count;     // number of components
+
+        public UF(int n) {
+            if (n < 0) throw new IllegalArgumentException();
+            count = n;
+            parent = new int[n];
+            rank = new byte[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                rank[i] = 0;
+            }
+        }
+
+        public int find(int p) {
+            validate(p);
+            while (p != parent[p]) {
+                parent[p] = parent[parent[p]];    // path compression by halving
+                p = parent[p];
+            }
+            return p;
+        }
+
+        public int count() {
+            return count;
+        }
+
+        public boolean connected(int p, int q) {
+            return find(p) == find(q);
+        }
+
+        public void union(int p, int q) {
+            int rootP = find(p);
+            int rootQ = find(q);
+            if (rootP == rootQ) return;
+
+            // make root of smaller rank point to root of larger rank
+            if      (rank[rootP] < rank[rootQ]) parent[rootP] = rootQ;
+            else if (rank[rootP] > rank[rootQ]) parent[rootQ] = rootP;
+            else {
+                parent[rootQ] = rootP;
+                rank[rootP]++;
+            }
+            count--;
+        }
+
+        // validate that p is a valid index
+        private void validate(int p) {
+            int n = parent.length;
+            if (p < 0 || p >= n) {
+                throw new IllegalArgumentException("index " + p + " is not between 0 and " + (n-1));
+            }
+        }
+
+    }
+
+}
