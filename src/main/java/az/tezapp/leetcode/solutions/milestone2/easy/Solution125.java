@@ -2,6 +2,7 @@ package az.tezapp.leetcode.solutions.milestone2.easy;
 
 public class Solution125 {
 
+    // ACCEPTED - 95%
     public boolean isPalindrome(String s) {
         int len = s.length();
         if (len == 0) {
