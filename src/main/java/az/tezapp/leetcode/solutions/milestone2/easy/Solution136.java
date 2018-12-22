@@ -8,13 +8,21 @@ public class Solution136 {
     // ACCEPTED - 30%
     public int singleNumber(int[] nums) {
         Set<Integer> set = new HashSet<>();
-        int len = nums.length;
         for (int num : nums) {
             if (!set.add(num)) {
                 set.remove(num);
             }
         }
         return set.iterator().next();
+    }
+
+    // after checking the discussion
+    public int singleNumber1(int[] nums) {
+        int ans = 0;
+        for (int num : nums) {
+            ans ^= num;
+        }
+        return ans;
     }
 
 }
