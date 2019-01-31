@@ -1,7 +1,7 @@
-package az.tezapp.leetcode.solutions.miliestone3;
+package az.tezapp.leetcode.solutions.miliestone3.medium;
 
 import az.tezapp.leetcode.solutions.TreeNode;
-import az.tezapp.leetcode.solutions.milestone3.Solution103;
+import az.tezapp.leetcode.solutions.milestone3.medium.Solution103;
 import org.junit.jupiter.api.Test;
 
 class Solution103Test {

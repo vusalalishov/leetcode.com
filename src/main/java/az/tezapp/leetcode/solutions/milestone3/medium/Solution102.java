@@ -1,4 +1,4 @@
-package az.tezapp.leetcode.solutions.milestone3;
+package az.tezapp.leetcode.solutions.milestone3.medium;
 
 import java.util.ArrayList;
 import java.util.Collections;
