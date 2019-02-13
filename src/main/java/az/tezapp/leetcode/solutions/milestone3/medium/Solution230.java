@@ -21,9 +21,8 @@ public class Solution230 {
                 if (k == 0) {
                     return node.val;
                 }
-                goLeft = false;
-                if (node.right != null) {
-                    goLeft = true;
+                goLeft = node.right != null;
+                if (goLeft) {
                     stack.push(node.right);
                 }
             }
