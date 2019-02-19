@@ -9,4 +9,10 @@ public class TreeNode {
     public TreeNode(int val) {
         this.val = val;
     }
+
+    public static TreeNode of(Integer[] input) {
+        // TODO: implement
+        return null;
+    }
+
 }
