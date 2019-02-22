@@ -11,8 +11,17 @@ public class TreeNode {
     }
 
     public static TreeNode of(Integer[] input) {
-        // TODO: implement
-        return null;
+        return of(input, 0);
+    }
+
+    public static TreeNode of(Integer[] input, int index) {
+        if (index >= input.length || input[index] == null) {
+            return null;
+        }
+        TreeNode treeNode = new TreeNode(input[index]);
+        treeNode.left = of(input, index * 2 + 1);
+        treeNode.right = of(input, index * 2 + 2);
+        return treeNode;
     }
 
 }
