@@ -29,23 +29,27 @@ public class Solution138 {
 
     // ACCEPTED - 72.71% - TODO: optimize it
     public Node copyRandomList(Node head) {
-        return copy(head, new HashMap<>());
-    }
 
-    private Node copy(Node head, Map<Node, Node> oldToNewMap) {
-        if (head != null) {
-            oldToNewMap.putIfAbsent(head, new Node(head.val, null, null));
-            Node n = oldToNewMap.get(head);
-            n.next = copy(head.next, oldToNewMap);
+        Map<Node, Node> oldToNewMap = new HashMap<>();
 
-            if (head.random != null) {
-                oldToNewMap.putIfAbsent(head.random, new Node(head.random.val, null, null));
-                n.random = oldToNewMap.get(head.random);
+        Node h = new Node();
+        Node lastNode = h;
+        Node loop = head;
+        while (loop != null) {
+            Node n = oldToNewMap.putIfAbsent(loop, new Node(loop.val, null, null));
+            if (n == null) {
+                n = oldToNewMap.get(loop);
             }
-            return n;
-        } else {
-            return null;
+            if (loop.random != null) {
+                oldToNewMap.putIfAbsent(loop.random, new Node(loop.random.val, null, null));
+                n.random = oldToNewMap.get(loop.random);
+            }
+            lastNode.next = n;
+            lastNode = n;
+            loop = loop.next;
         }
+
+        return h.next;
     }
 
 
